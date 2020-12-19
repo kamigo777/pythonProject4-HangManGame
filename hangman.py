@@ -38,9 +38,9 @@ HANGMAN_PICS = ['''
 words = 'аист акула бабуин бобр ' .split()
 
 def getRandomWord(wordList):
-    #Эта функция возвращает случаную строку из переданого списка
+    # Эта функция возвращает случаную строку из переданого списка
     wordIndex = random.randint(0, len(wordList) -1)
-    return wordList [wordIndex]
+    return wordList[wordIndex]
 
 def displayBoard(missedLetters, correctLetters, secretWord):
     print(HANGMAN_PICS[len(missedLetters)])
@@ -48,26 +48,26 @@ def displayBoard(missedLetters, correctLetters, secretWord):
 
     print('Ошибочные буквы:', end=' ')
     for letter in missedLetters:
-        print(letter, end= ' ')
+        print(letter, end=' ')
     print()
 
     blanks = '_' * len(secretWord)
 
-    for i in range(len(secretWord)): #заменяет пропуски отгаданными буквами
+    for i in range(len(secretWord)):  # Заменяет пропуски отгаданными буквами
         if secretWord[i] in correctLetters:
-            blanks = blanks[:i] + secretWord[i] + blanks [i+1:]
+            blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
 
-        for letter in blanks: #Показывает секретное слово с пробелами между буквами
+        for letter in blanks:   # Показывает секретное слово с пробелами между буквами
             print(letter, end=' ')
         print()
 
 def getGuess(alreadyGuessed):
-        #возвращает букву введеную игроком.Эта функция проверет что игрок ввел только одну букву и ничего больше
+        # Возвращает букву введеную игроком.Эта функция проверет что игрок ввел только одну букву и ничего больше
     while True:
         print('Введите букву')
         guess = input()
         guess = guess.lower()
-        if len(guess) !=1:
+        if len(guess) != 1:
             print('Пожалуста, введите одну букву!')
         elif guess in alreadyGuessed:
             print('Вы уже называли эту букву, введите другую')
@@ -77,7 +77,7 @@ def getGuess(alreadyGuessed):
             return guess
 
 def playAgain():
-    #Эта функция фозращает значение True если игрок хочет сыграть заново
+    # Эта функция фозращает значение True если игрок хочет сыграть заново
     # в противном случае False
     print('Хотите сыграть еще?(да или нет)')
     return input().lower().startswith('д')
@@ -91,30 +91,30 @@ gameIsDone = False
 while True:
     displayBoard(missedLetters, correctLetters, secretWord)
 
-    #Позволяет игроку ввести букву
+    # Позволяет игроку ввести букву
     guess = getGuess(missedLetters + correctLetters)
 
     if guess in secretWord:
         correctLetters = correctLetters + guess
 
-        #проверяем выиграл ли игрок
+        # Проверяем выиграл ли игрок
         foundAllLetters = True
         for i in range(len(secretWord)):
             if secretWord[i] not in correctLetters:
                 foundAllLetters = False
                 break
         if foundAllLetters:
-            print('ДА! Секретное слово - "'+ secretWord + '" ! Вы угадали! ')
+            print('ДА! Секретное слово - "' + secretWord + '" ! Вы угадали! ')
             gameIsDone = True
     else:
         missedLetters = missedLetters + guess
 
-        #Проверяет превысил ли игрок лимит попыток, и проиграл
+        # Проверяет превысил ли игрок лимит попыток, и проиграл
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
             displayBoard(missedLetters, correctLetters, secretWord)
         print('Вы исчерпали все попытки! Не угаданно букв: ' + str(len(missedLetters)) + ' и угаданно букв: ' + str(len(correctLetters)) + '. Было загадано слово "' + secretWord + '" . ')
-        фgameIsDone = True
-        #Запрашивает хочет ли игрок сыграать заново
+        gameIsDone = True
+        # Запрашивает хочет ли игрок сыграать заново
     if gameIsDone:
         if playAgain():
             missedLetters = ''
