@@ -103,9 +103,9 @@ while True:
             if secretWord[i] not in correctLetters:
                 foundAllLetters = False
                 break
-        if foundAllLetters:
-            print('ДА! Секретное слово - "' + secretWord + '" ! Вы угадали! ')
-            gameIsDone = True
+            if foundAllLetters:
+                print('ДА! Секретное слово - "' + secretWord + '" ! Вы угадали! ')
+                gameIsDone = True
     else:
         missedLetters = missedLetters + guess
 
