@@ -105,15 +105,15 @@ while True:
                 break
             if foundAllLetters:
                 print('ДА! Секретное слово - "' + secretWord + '" ! Вы угадали! ')
-                gameIsDone = True
+                agameIsDone = True
     else:
         missedLetters = missedLetters + guess
 
         # Проверяет превысил ли игрок лимит попыток, и проиграл
         if len(missedLetters) == len(HANGMAN_PICS) - 1:
             displayBoard(missedLetters, correctLetters, secretWord)
-        print('Вы исчерпали все попытки! Не угаданно букв: ' + str(len(missedLetters)) + ' и угаданно букв: ' + str(len(correctLetters)) + '. Было загадано слово "' + secretWord + '" . ')
-        gameIsDone = True
+            print('Вы исчерпали все попытки! Не угаданно букв: ' + str(len(missedLetters)) + ' и угаданно букв: ' + str(len(correctLetters)) + '. Было загадано слово "' + secretWord + '" . ')
+            gameIsDone = True
         # Запрашивает хочет ли игрок сыграать заново
     if gameIsDone:
         if playAgain():
